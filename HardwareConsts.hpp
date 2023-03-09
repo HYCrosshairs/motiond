@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace hw::lib
 {
 enum class STATE : uint8_t
