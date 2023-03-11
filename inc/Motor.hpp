@@ -5,6 +5,7 @@
 #include <utility>
 namespace hw::control::motor
 {
+constexpr char GPIO_PATH[] = "/sys/class/gpio/gpio%d/value";
 template <typename self>
 class Motor
 {
@@ -19,8 +20,9 @@ public:
     
     void pinMode(uint8_t pin, lib::MODE mode);
 
-protected:
-    void write(uint8_t pin, lib::STATE);
+//protected:
+    void write(uint8_t pin, lib::STATE state);
+    
     template<typename T>
     T read(uint8_t pin);
 
@@ -33,7 +35,7 @@ private:
         return static_cast<self&>(*this);
     }
 
-    bool digital() const; // TODO
-    double analog() const; // TODO
+    bool digital(uint8_t pin) const;
+    double analog(uint8_t pin) const;
 };
 }

@@ -9,8 +9,8 @@ namespace hw::control::motor
 constexpr uint8_t MAX_STEPS = 8;
 constexpr uint8_t MAX_COILS = 4;
 
-auto HIGH = lib::STATE::HIGH;
-auto LOW  = lib::STATE::LOW;
+const uint8_t HIGH = 1;
+const uint8_t LOW  = 0;
 
 class StepperMotor : public Motor<StepperMotor>
 {
@@ -26,7 +26,7 @@ private:
     uint8_t in3;
     uint8_t in4;
 
-    const std::array<std::array<lib::STATE, MAX_COILS>, MAX_STEPS> clockwiseRotation = {
+    const std::array<std::array<uint8_t, MAX_COILS>, MAX_STEPS> clockwiseRotation = {
         {
             {HIGH, LOW,  LOW,  LOW },
             {HIGH, HIGH, LOW,  LOW },
