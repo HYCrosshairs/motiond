@@ -7,11 +7,10 @@ using namespace hw::control::motor;
 
 StepperMotor::StepperMotor(uint8_t input1, uint8_t input2, uint8_t input3, uint8_t input4) : in1(input1), in2(input2), in3(input3), in4(input4)
 {
-    std::cout << "StepperMotor constructor\n";
     pinMode(input1, lib::MODE::OUT);
     pinMode(input2, lib::MODE::OUT);
     pinMode(input3, lib::MODE::OUT);
-    pinMode(input3, lib::MODE::OUT);
+    pinMode(input4, lib::MODE::OUT);
 }
 
 StepperMotor::~StepperMotor()
@@ -19,26 +18,33 @@ StepperMotor::~StepperMotor()
     
 }
 
-void StepperMotor::startRotation()
+void StepperMotor::startRotation(uint16_t numOfSteps, uint8_t speed)
 {
-    std::cout << "StepperMotor startRotation\n";
+    setSpeed(speed);
     
-    write(in1, lib::STATE::HIGH);
-    write(in2, lib::STATE::HIGH);
-    write(in3, lib::STATE::HIGH);
-    write(in4, lib::STATE::HIGH);
-
-    usleep(1000000);
-    
-    write(in1, lib::STATE::LOW);
-    write(in2, lib::STATE::LOW);
-    write(in3, lib::STATE::LOW);
-    write(in4, lib::STATE::LOW);
-    usleep(1000000);
+    rotateByStep(numOfSteps);
 }
 
-void StepperMotor::rotateByStep(uint8_t step)
+void StepperMotor::rotateByStep(uint16_t numOfSteps)
 {
-    (void)step;
-    // TODO : 
+    uint16_t stepCount = 0;
+
+    while (stepCount < numOfSteps)
+    {
+        for (uint8_t step = 0; step < MAX_STEPS; step++)
+        {
+            write(in1, static_cast<STATE>(clockwiseRotation[step][0]));
+            write(in2, static_cast<STATE>(clockwiseRotation[step][1]));
+            write(in3, static_cast<STATE>(clockwiseRotation[step][2]));
+            write(in4, static_cast<STATE>(clockwiseRotation[step][3]));
+            usleep(rotationSpeed);
+        }
+        stepCount++;
+    }
+
+}
+
+void StepperMotor::setSpeed(uint8_t speed)
+{
+    rotationSpeed = speed * 1000000;
 }

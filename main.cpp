@@ -5,11 +5,11 @@ using namespace hw::control::motor;
 
 int main()
 {
-    StepperMotor stepper(21, 15, 16, 17);
+    StepperMotor stepper(21, 22, 4, 5);
 
     while (true)
     {
-        stepper.startRotation();
+        stepper.startRotation(16, 1);
     }
     
     return 0;

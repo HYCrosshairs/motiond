@@ -4,7 +4,7 @@
 
 namespace hw::lib
 {
-enum class STATE : uint8_t
+enum STATE : uint8_t
 {
     LOW,
     HIGH
@@ -16,7 +16,7 @@ enum class MODE : uint8_t
     OUT
 };
 
-constexpr char* DIRECTION[] = {
+constexpr const char* const DIRECTION[] = {
                             "in",
                             "out"
                           };

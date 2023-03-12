@@ -18,9 +18,15 @@ public:
     ~Motor() = default;
 
     template<typename ...Args>
-    void startRotation(Args&& ...args)
+    void startRotation(Args ...args)
     {
         getContext().startRotation(std::forward<Args>(args)...);
+    }
+
+    template<typename ...Args>
+    void setSpeed(Args ...args)
+    {
+        getContext().setSpeed(std::forward<Args>(args)...);
     }
     
     inline void pinMode(uint8_t pin, lib::MODE mode)
@@ -65,7 +71,7 @@ protected:
         }
 
         fprintf(gpioValue, "%d\n", static_cast<uint8_t>(state));
-        fclose(gpio);
+        fclose(gpioValue);
     }
     
     template<typename T>
