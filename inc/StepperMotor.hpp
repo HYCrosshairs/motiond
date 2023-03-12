@@ -4,6 +4,7 @@
 #include "HardwareConsts.hpp"
 
 #include <array>
+#include <fstream>
 namespace hw::control::motor
 {
 constexpr uint8_t MAX_STEPS = 8;

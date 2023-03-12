@@ -3,9 +3,14 @@
 #include "HardwareConsts.hpp"
 
 #include <utility>
+#include <fstream>
+#include <iostream>
+
 namespace hw::control::motor
 {
 constexpr char GPIO_PATH[] = "/sys/class/gpio/gpio%d/value";
+constexpr char GPIO_MODE[] = "/sys/class/gpio/gpio%d/direction";
+constexpr char GPIO_EXPORT_PATH[] = "/sys/class/gpio/export";
 template <typename self>
 class Motor
 {
@@ -18,10 +23,50 @@ public:
         getContext().startRotation(std::forward<Args>(args)...);
     }
     
-    void pinMode(uint8_t pin, lib::MODE mode);
+    inline void pinMode(uint8_t pin, lib::MODE mode)
+    {
+        FILE* gpioToExport = fopen(GPIO_EXPORT_PATH, "w");
+        if(gpioToExport == nullptr)
+        {
+            std::cerr << "Failed to open export file" << std::endl;
+        }
+        
+        fprintf(gpioToExport, "%d\n", static_cast<uint8_t>(pin));
 
-//protected:
-    void write(uint8_t pin, lib::STATE state);
+        fclose(gpioToExport);
+
+        char modePath[50];
+        sprintf(modePath, GPIO_MODE, pin);
+
+        FILE* gpioMode = fopen(modePath, "w");
+
+        if(gpioMode == nullptr)
+        {
+            std::cerr << "Failed to open export file" << std::endl;
+        }
+
+        fprintf(gpioMode, "%s\n", lib::DIRECTION[static_cast<uint8_t>(mode)]);
+
+        fclose(gpioMode);
+    }
+
+protected:
+    inline void write(uint8_t pin, lib::STATE state)
+    {
+        char gpio[50];
+
+        snprintf(gpio, sizeof(gpio), GPIO_PATH, pin);
+
+        FILE* gpioValue = fopen(gpio, "w");
+
+        if(gpioValue == nullptr)
+        {
+            std::cerr << "Failed to open value file" << std::endl;
+        }
+
+        fprintf(gpioValue, "%d\n", static_cast<uint8_t>(state));
+        fclose(gpio);
+    }
     
     template<typename T>
     T read(uint8_t pin);

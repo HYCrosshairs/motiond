@@ -34,4 +34,5 @@
 Makefile
 *.cmake
 CMakeFiles
+CMakeCache.txt
 motiond

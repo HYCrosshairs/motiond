@@ -12,7 +12,13 @@ enum class STATE : uint8_t
 
 enum class MODE : uint8_t
 {
-    // TODO 
+    IN,
+    OUT
 };
+
+constexpr char* DIRECTION[] = {
+                            "in",
+                            "out"
+                          };
     
 } // namespace hw::lib
