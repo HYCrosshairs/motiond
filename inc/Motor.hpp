@@ -11,6 +11,21 @@ namespace hw::control::motor
 constexpr char GPIO_PATH[] = "/sys/class/gpio/gpio%d/value";
 constexpr char GPIO_MODE[] = "/sys/class/gpio/gpio%d/direction";
 constexpr char GPIO_EXPORT_PATH[] = "/sys/class/gpio/export";
+
+enum class DIRECTION
+{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
+};
+
+enum class ROTATION
+{
+    ANTICLOCKWISE = static_cast<int>(DIRECTION::LEFT),
+    CLOCKWISE = static_cast<int>(DIRECTION::RIGHT);
+};
+
 template <typename self>
 class Motor
 {
@@ -27,6 +42,11 @@ public:
     void setSpeed(Args ...args)
     {
         getContext().setSpeed(std::forward<Args>(args)...);
+    }
+
+    inline void stop()
+    {
+        getContext().stop();
     }
     
     inline void pinMode(uint8_t pin, lib::MODE mode)
