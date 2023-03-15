@@ -8,20 +8,23 @@ namespace hw::control::motor
 class ServoMotor : public Motor<ServoMotor>
 {
 public:
-    ServoMotor();
+    ServoMotor(uint8_t channel, uint16_t minPulseWidth = 500, uint16_t maxPulseWidth = 2500);
     ~ServoMotor();
 
-    void startRotation();
+    void startRotation(uint16_t angle, DIRECTION direction, uint8_t speed);
 
     void stop();
 
 private:
-    int pwmFd;
+    uint8_t channel;
+    uint16_t minPulseWidth;
+    uint16_t maxPulseWidth;
+    uint8_t pwmFd;
     uint8_t speed;
-    uint8_t currentAngle;
+    uint16_t currentAngle;
     DIRECTION direction;
 
-    void setAngle();
+    void setAngle(uint16_t angle, bool clockWise = true);
 
 };
 

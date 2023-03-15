@@ -5,12 +5,12 @@
 #include <utility>
 #include <fstream>
 #include <iostream>
+#include <stddef.h>
 
 namespace hw::control::motor
 {
-constexpr char GPIO_PATH[] = "/sys/class/gpio/gpio%d/value";
-constexpr char GPIO_MODE[] = "/sys/class/gpio/gpio%d/direction";
-constexpr char GPIO_EXPORT_PATH[] = "/sys/class/gpio/export";
+
+using namespace hw::lib;
 
 enum class DIRECTION
 {
@@ -23,7 +23,7 @@ enum class DIRECTION
 enum class ROTATION
 {
     ANTICLOCKWISE = static_cast<int>(DIRECTION::LEFT),
-    CLOCKWISE = static_cast<int>(DIRECTION::RIGHT);
+    CLOCKWISE = static_cast<int>(DIRECTION::RIGHT)
 };
 
 template <typename self>
