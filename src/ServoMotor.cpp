@@ -35,7 +35,7 @@ ServoMotor::~ServoMotor()
     stop();
 }
 
-void ServoMotor::startRotation(uint16_t angle, DIRECTION direction, uint8_t speed)
+void ServoMotor::startRotation(uint16_t angle, ROTATION direction, uint8_t speed)
 {
     // TODO
 }
@@ -62,9 +62,9 @@ void ServoMotor::setAngle(uint16_t angle, bool clockWise)
     
     struct pwmDutyCycle cycle = { 0, pwm_value };
     
-    ioctl(pwm_fd_, PWM_IOCTL_SET_DUTY_CYCLE, &cycle);
+    ioctl(pwmFd, PWM_IOCTL_SET_DUTY_CYCLE, &cycle);
     struct pwmDutyCycle cycles[1] = { cycle };
-    ioctl(pwm_fd_, PWM_IOCTL_SET_DUTY_CYCLE, &cycles);
+    ioctl(pwmFd, PWM_IOCTL_SET_DUTY_CYCLE, &cycles);
     
     if (clockWise)
     {
