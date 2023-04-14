@@ -30,14 +30,14 @@ private:
 
     const std::array<std::array<uint8_t, MAX_COILS>, MAX_STEPS> clockwiseRotation = {
         {
-            {STATE::HIGH, STATE::LOW,  STATE::LOW,  STATE::LOW },
-            {STATE::HIGH, STATE::HIGH, STATE::LOW,  STATE::LOW },
-            {STATE::LOW,  STATE::HIGH, STATE::LOW,  STATE::LOW },
-            {STATE::LOW,  STATE::HIGH, STATE::HIGH, STATE::LOW },
-            {STATE::LOW,  STATE::LOW,  STATE::HIGH, STATE::LOW },
-            {STATE::LOW,  STATE::LOW,  STATE::HIGH, STATE::HIGH},
-            {STATE::LOW,  STATE::LOW,  STATE::LOW,  STATE::HIGH},
-            {STATE::HIGH, STATE::LOW,  STATE::LOW,  STATE::HIGH}
+            {STATE::high, STATE::low,  STATE::low,  STATE::low },
+            {STATE::high, STATE::high, STATE::low,  STATE::low },
+            {STATE::low,  STATE::high, STATE::low,  STATE::low },
+            {STATE::low,  STATE::high, STATE::high, STATE::low },
+            {STATE::low,  STATE::low,  STATE::high, STATE::low },
+            {STATE::low,  STATE::low,  STATE::high, STATE::high},
+            {STATE::low,  STATE::low,  STATE::low,  STATE::high},
+            {STATE::high, STATE::low,  STATE::low,  STATE::high}
         }
     };
 

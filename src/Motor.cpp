@@ -12,7 +12,7 @@ T Motor<self>::read(uint8_t pin)
     if constexpr(std::is_same_v<T, lib::STATE>)
     {
         bool state = digital();
-        return state ? lib::STATE::HIGH : lib::STATE::LOW; 
+        return state ? lib::STATE::high : lib::STATE::low; 
     }
     else if constexpr(std::is_same_v<T, double>)
     {

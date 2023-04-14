@@ -14,16 +14,16 @@ using namespace hw::lib;
 
 enum class DIRECTION
 {
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN
+    left,
+    right,
+    up,
+    down
 };
 
 enum class ROTATION
 {
-    ANTICLOCKWISE = static_cast<int>(DIRECTION::LEFT),
-    CLOCKWISE = static_cast<int>(DIRECTION::RIGHT)
+    anticlockwise = static_cast<int>(DIRECTION::left),
+    clockwise = static_cast<int>(DIRECTION::right)
 };
 
 template <typename self>
